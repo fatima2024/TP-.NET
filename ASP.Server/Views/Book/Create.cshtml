@@ -4,34 +4,120 @@
 @{
     ViewData["Title"] = "Add a book";
 }
+
 <style>
-.input-group {
-    margin-top:10px;
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-}
-input, textarea, select {
-    flex-basis:85%;
-}
-label {
-    flex-basis:10%;
-}
+    /* Utilisation de variables CSS pour une meilleure cohérence et réutilisabilité */
+    :root {
+        --primary-color: #5c6ac4;
+        --error-color: #e3342f;
+        --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        font-family: var(--font-stack);
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .form-container {
+        max-width: 500px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .input-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .input-group input,
+        .input-group select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+            .input-group input:focus,
+            .input-group select:focus {
+                outline: none;
+                border-color: var(--primary-color);
+                box-shadow: 0 0 3px rgba(92, 106, 196, 0.5);
+            }
+
+    .text-danger {
+        color: var(--error-color);
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: var(--primary-color);
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        button:hover {
+            background-color: darken(var(--primary-color), 10%);
+        }
+
+    /* Fonction pour assombrir une couleur */
+    function darken(color, percent) {
+        /* Ajoutez ici votre code pour assombrir la couleur */
+    }
 </style>
 
-<!-- Voici une facon de faire, mais ce n'est pas la seul, a vous de jouer ! -->
-<form asp-controller="Book" asp-action="Create">
-    <div class="input-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" />
-    </div>
-    <span asp-validation-for="Name" class="text-danger"></span>
-    <div class="input-group">
-        <label asp-for="Genres"></label>
-        <!--Si la page rend une erreur a cette ligne, c'est que vous n'avez pas envoyé la liste des genres dans le Controller !!! ! -->
-        <select asp-for="Genres" asp-items="@(new SelectList(Model.AllGenres,"Id","Id"))">
-        </select>
-    </div>
-    <span asp-validation-for="Genres" class="text-danger"></span>
-    <input type="submit" value="Add" style="width: 100%; margin-top: 50px" />
-</form>
+<div class="form-container">
+    <form asp-controller="Book" asp-action="Create">
+        <!-- Champ pour le nom du livre -->
+        <div class="input-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Champ pour l'auteur -->
+        <div class="input-group">
+            <label asp-for="Author"></label>
+            <input asp-for="Author" />
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
+
+        <!-- Champ pour le prix -->
+        <div class="input-group">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="input-group">
+            <label asp-for="Content"></label>
+            <input asp-for="Content" />
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+
+        <!-- Sélection des genres -->
+        <div class="input-group">
+            <label asp-for="Genres"></label>
+            <select asp-for="Genres" asp-items="@(new SelectList(Model.AllGenres,"Id","Name"))" multiple="multiple"></select>
+            <span asp-validation-for="Genres" class="text-danger"></span>
+        </div>
+
+        <input type="submit" value="Add" style="width: 100%; margin-top: 50px" />
+    </form>
+</div>

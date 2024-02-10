@@ -1,0 +1,17 @@
+﻿@using ASP.Server.Controllers
+@using ASP.Server.ViewModels
+@model AddGenreViewModel
+@{
+    ViewData["Title"] = "Add Genre";
+}
+
+<h1>Add Genre</h1>
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Genre</button>
+</form>

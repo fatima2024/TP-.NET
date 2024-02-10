@@ -54,10 +54,13 @@ namespace ASP.Server
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
+
+
             using (var scope = ASP_Server.ApplicationServices.CreateScope())
             {
                 DbInitializer.Initialize(scope.ServiceProvider.GetRequiredService<LibraryDbContext>());
             }
+
         }
     }
 }

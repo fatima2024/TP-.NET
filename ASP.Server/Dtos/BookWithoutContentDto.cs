@@ -1,18 +1,12 @@
-﻿using ASP.Server.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using AutoMapper;
+﻿using System.Collections.Generic;
 
 namespace ASP.Server.Dtos
 {
-    public class BookDto
+    public class BookWithoutContentDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
-        public string Content { get; set; }
         public List<GenreDto> Genres { get; set; }
-
     }
 }

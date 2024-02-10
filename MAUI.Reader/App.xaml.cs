@@ -2,6 +2,7 @@
 using MAUI.Reader.ViewModel;
 using MAUI.Reader.Service;
 
+
 namespace MAUI.Reader
 {
     public partial class App : Application
@@ -15,6 +16,7 @@ namespace MAUI.Reader
                 new ServiceCollection()
                 .AddSingleton<INavigationService>(new NavigationService())
                 .AddSingleton(new LibraryService())
+                .AddTransient<ListBooks>()
                 .BuildServiceProvider());
 
             MainPage = new AppShell();
